@@ -1,0 +1,48 @@
+Docker commmands
+
+++++++++++++++++++++++++
+
+ <!-- create a Image of an docker -->
+
+<!-- Command :  -->
+ docker build -t sumukh-customer ./customers     
+ 
+ <!-- -t : tag the image with its name "sumukh-customer" , 
+ ./customer : path of Dockerfile -->
+
+
+++++++++++++++++++++++++
+
+ <!-- create a Container of an image -->
+
+<!-- Command :  -->
+docker run -p 8002:3000 sumukh-customer
+
+<!-- -p : denote to the port
+8002: browser port when ever the docker run the application, docker will use port 8002  -->
+
+
+
+
+++++++++++++++++++++++++
+
+ <!-- list of docker image -->
+
+<!-- Command :  -->
+docker image ls
+
+
+
+
+++++++++++++++++++++++++
+
+ <!-- delete  the  docker image -->
+
+<!-- Command :  -->
+docker image rm  0bed5f0d0bc0
+
+<!-- rm: remove image
+0bed5f0d0bc0: image ID -->
+
+
+

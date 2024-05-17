@@ -1,0 +1,35 @@
+const { Kafka } = require("kafkajs");
+
+//creating the kafka product producer
+const kafka = new Kafka({
+  clientId: "product-module",
+  brokers: ["localhost:8003"],
+});
+const producer = kafka.producer();
+const produceProductEvent = async (productData) => {
+  await producer.connect();
+  await producer.send({
+    topic: "product-events",
+    messages: [{ value: JSON.stringify(productData) }],
+  });
+  await producer.disconnect();
+};
+
+
+
+//creating kafka product consumer
+const consumer = kafka.consumer({ groupId: "customer-module" });
+
+const consumeProductEvent = async () => {
+  await consumer.connect();
+  await consumer.subscribe({ topic: "customer-events", fromBeginning: true });
+
+  await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+      const consumerData = JSON.parse(message.value.toString());
+      // Process productData
+    },
+  });
+};
+consumeProductEvent().catch(console.error);
+module.exports = { produceProductEvent, consumeProductEvent };

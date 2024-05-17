@@ -1,0 +1,17 @@
+version: '3'
+services:
+  product-service:
+    build:
+    context: ./products         # path for products directory where Dockerfile contains
+    dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    # depends_on:
+    #   - user-service
+
+  user-service:
+    build: 
+    context: ./customers       # path for customers directory where Dockerfile contains
+    dockerfile: Dockerfile
+    ports:
+     - "8002:8002"
